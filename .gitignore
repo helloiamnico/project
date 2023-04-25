@@ -1,24 +1,150 @@
-# Compiled class file
-*.class
+import java.util.Scanner;
+import java.util.Random;
 
-# Log file
-*.log
-
-# BlueJ files
-*.ctxt
-
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
-
-# Package Files #
-*.jar
-*.war
-*.nar
-*.ear
-*.zip
-*.tar.gz
-*.rar
-
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
-replay_pid*
+public class MathProgram {
+  public static void main(String[] args) {
+    Scanner input = new Scanner(System.in);
+    Random rand = new Random();
+    int numCorrectAdd = 0, numIncorrectAdd = 0, numCorrectSub = 0, numIncorrectSub = 0,
+        numCorrectMult = 0, numIncorrectMult = 0, numCorrectDiv = 0, numIncorrectDiv = 0;
+    
+    System.out.println("Welcome to the Math Program!");
+    while (true) {
+      System.out.println("Select a type of math problem:");
+      System.out.println("1. Addition");
+      System.out.println("2. Subtraction");
+      System.out.println("3. Multiplication");
+      System.out.println("4. Division");
+      System.out.println("5. Exit");
+      System.out.print("Enter your choice: ");
+      
+      int choice = input.nextInt();
+      if (choice < 1 || choice > 5) {
+        System.out.println("Invalid choice. Please enter a number from 1 to 5.");
+        continue;
+      }
+      if (choice == 5) {
+        break;
+      }
+      
+      int numCorrect = 0, numIncorrect = 0;
+      int numQuestions = 0;
+      switch (choice) {
+        case 1: // Addition
+          System.out.println("You chose Addition. Let's start!");
+          while (true) {
+            int num1 = rand.nextInt(101);
+            int num2 = rand.nextInt(101);
+            int correctAnswer = num1 + num2;
+            System.out.printf("%d + %d = ", num1, num2);
+            int userAnswer = input.nextInt();
+            if (userAnswer == correctAnswer) {
+              System.out.println("Correct!");
+              numCorrect++;
+            } else {
+              System.out.printf("Incorrect. The correct answer is %d.%n", correctAnswer);
+              numIncorrect++;
+            }
+            numQuestions++;
+            System.out.print("Continue with Addition? (y/n) ");
+            String continueChoice = input.next();
+            if (continueChoice.equalsIgnoreCase("n")) {
+              break;
+            }
+          }
+          numCorrectAdd += numCorrect;
+          numIncorrectAdd += numIncorrect;
+          break;
+        case 2: // Subtraction
+          System.out.println("You chose Subtraction. Let's start!");
+          while (true) {
+            int num1 = rand.nextInt(101);
+            int num2 = rand.nextInt(101);
+            if (num1 < num2) { // Swap numbers to avoid negative answers
+              int temp = num1;
+              num1 = num2;
+              num2 = temp;
+            }
+            int correctAnswer = num1 - num2;
+            System.out.printf("%d - %d = ", num1, num2);
+            int userAnswer = input.nextInt();
+            if (userAnswer == correctAnswer) {
+              System.out.println("Correct!");
+              numCorrect++;
+            } else {
+              System.out.printf("Incorrect. The correct answer is %d.%n", correctAnswer);
+              numIncorrect++;
+            }
+            numQuestions++;
+            System.out.print("Continue with Subtraction? (y/n) ");
+            String continueChoice = input.next();
+            if (continueChoice.equalsIgnoreCase("n")) {
+              break;
+            }
+          }
+          numCorrectSub += numCorrect;
+          numIncorrectSub += numIncorrect;
+          break;
+        case 3: // Multiplication
+      int num2 = rand.nextInt(13);
+int correctAnswer = num1 * num2;
+System.out.printf("%d * %d = ", num1, num2);
+int userAnswer = input.nextInt();
+if (userAnswer == correctAnswer) {
+System.out.println("Correct!");
+numCorrect++;
+} else {
+System.out.printf("Incorrect. The correct answer is %d.%n", correctAnswer);
+numIncorrect++;
+}
+numQuestions++;
+System.out.print("Continue with Multiplication? (y/n) ");
+String continueChoice = input.next();
+if (continueChoice.equalsIgnoreCase("n")) {
+break;
+}
+}
+numCorrectMult += numCorrect;
+numIncorrectMult += numIncorrect;
+break;
+case 4: // Division
+System.out.println("You chose Division. Let's start!");
+while (true) {
+int num1 = rand.nextInt(13) * 2; // Up to 24 divided by 2
+int num2 = rand.nextInt(12) + 1; // Non-zero divisor
+int dividend = num1;
+int correctAnswer = num1 / num2;
+num1 = correctAnswer; // Make num1 the quotient
+System.out.printf("%d / %d = ", dividend, num2);
+int userAnswer = input.nextInt();
+if (userAnswer == correctAnswer) {
+System.out.println("Correct!");
+numCorrect++;
+} else {
+System.out.printf("Incorrect. The correct answer is %d.%n", correctAnswer);
+numIncorrect++;
+}
+numQuestions++;
+System.out.print("Continue with Division? (y/n) ");
+String continueChoice = input.next();
+if (continueChoice.equalsIgnoreCase("n")) {
+break;
+}
+}
+numCorrectDiv += numCorrect;
+numIncorrectDiv += numIncorrect;
+break;
+}
+double percentCorrect = numQuestions == 0 ? 0 : (double) numCorrect / numQuestions * 100;
+System.out.printf("You answered %d out of %d questions correctly (%.1f%%).%n",
+numCorrect, numQuestions, percentCorrect);
+System.out.println();
+}
+// Display results summary
+System.out.println("Session Results:");
+System.out.printf("Addition: %d correct, %d incorrect%n", numCorrectAdd, numIncorrectAdd);
+System.out.printf("Subtraction: %d correct, %d incorrect%n", numCorrectSub, numIncorrectSub);
+System.out.printf("Multiplication: %d correct, %d incorrect%n", numCorrectMult, numIncorrectMult);
+System.out.printf("Division: %d correct, %d incorrect%n", numCorrectDiv, numIncorrectDiv);
+]
+}
